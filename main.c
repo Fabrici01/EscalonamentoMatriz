@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "./header/EliminacaoGauss.h"
 
 void lerMatriz(float** matriz,float *termos,int tamanho,FILE* arquivo){
     /*Ler Matriz dos Coeficientes*/
@@ -13,6 +14,13 @@ void lerMatriz(float** matriz,float *termos,int tamanho,FILE* arquivo){
     for(int x=0;x<tamanho;x++){
         fscanf(arquivo,"%f",&termos[x]);
     }
+}
+
+void freeMatriz(float** matriz,int tamanho){
+    for(int x=0;x<tamanho;x++){
+        free(matriz[x]);
+    }
+    free(matriz);
 }
 
 int main()
@@ -38,5 +46,17 @@ int main()
         printf("= %f\n",termos[x]);
     }
 
+    resolverEliminacaoGauss(matriz,termos,tamanho);
+
+    printf("\nMatriz Escalonada:\n");
+    for(int x=0;x<tamanho;x++){
+        for(int y=0;y<tamanho;y++){
+            printf("%.3f ",matriz[x][y]);
+        }
+        printf("= %f\n",termos[x]);
+    }
+
+
+    freeMatriz(matriz,tamanho);
     return 0;
 }
