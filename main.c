@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "./header/EliminacaoGauss.h"
 
 void lerMatriz(float** matriz,float *termos,int tamanho,FILE* arquivo){
     /*Ler Matriz dos Coeficientes*/
