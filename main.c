@@ -29,7 +29,7 @@ void freeMatriz(float** matriz,int tamanho){
 
 int main(int argc, char const *argv[]){
     if (argc != 2){
-        printf("ERRO: excesso de argumentos!");
+        printf("ERRO: excesso ou falta de argumentos!");
         exit(1);
     }
     

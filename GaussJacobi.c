@@ -39,6 +39,30 @@ float iteracaoGJ(float **A, float *B, int tamanho, float *xAnterior, float *xAtu
 }
 
 void gaussJacobi(float **A, float *B, int tamanho, float E){
+    for (int i = 0; i < tamanho; i++)
+    {
+        if (A[i][i] == 0)
+        {
+            printf("Termo da diagonal principal (linha %d) e nulo\n");
+            exit(1);
+        }
+        
+        int nula = 1;
+        for (int j = 0; j < tamanho; j++)
+        {
+            if (A[i][j] != 0)
+            {
+                nula = 0;
+                break;
+            }
+        }
+        if (nula && B[i] != 0)
+        {
+            printf("Linha %d nula e resultado: %f\nSistema impossivel\n", i+1, B[i]);
+            exit(1);
+        }
+    }
+    
     float *xAnterior = (float *)malloc(tamanho * sizeof(float));
     float *xAtual = (float *)malloc(tamanho * sizeof(float));
     if (!xAnterior || !xAtual) {
