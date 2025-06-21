@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "eliminacaogauss.h": "c"
+        "eliminacaogauss.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c"
     }
 }

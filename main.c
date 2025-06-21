@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "./header/EliminacaoGauss.h"
 #include "./header/FatoracaoLU.h"
+#include "./header/GaussJacobi.h"
 
 void lerMatriz(float** matriz,int tamanho,FILE* arquivo){
     /*Ler Matriz dos Coeficientes*/
