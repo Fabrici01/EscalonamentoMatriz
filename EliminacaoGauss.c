@@ -5,6 +5,8 @@
 void resolverEliminacaoGauss(float** matriz, float* termo, int tamanho){
     float m=0.0,vetorTemp[tamanho],termoTemp=0.0,resultado[tamanho];
     int i=0;
+
+    //Eliminação de Gauss em matrizU
     for(int k=0;k<tamanho;k++){
         if(matriz[k][k]==0){
             i = k+1;
@@ -30,8 +32,9 @@ void resolverEliminacaoGauss(float** matriz, float* termo, int tamanho){
             }
             termo[l] = termo[l] - (m * termo[k]);
         }
-    }
+    }//-------------------
 
+    //Substituição
     float total=0.0;
     for(int x=tamanho-1;x>=0;x--){
         total=0.0;
@@ -39,7 +42,7 @@ void resolverEliminacaoGauss(float** matriz, float* termo, int tamanho){
             total += matriz[x][y] * resultado[y];
         }
         resultado[x] = (termo[x]-total)/matriz[x][x];
-    }
+    }//-----------
 
     printf("\nSolucao:\n");
     for(int x=0;x<tamanho;x++){

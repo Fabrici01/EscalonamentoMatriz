@@ -13,7 +13,7 @@ FatoracaoLU.o: FatoracaoLU.c
 	gcc -c FatoracaoLU.c
 
 executa:
-	./prog.exe
+	./prog.exe arquivo.txt
 
 clean:
 	del main.o EliminacaoGauss.o FatoracaoLU.o prog
