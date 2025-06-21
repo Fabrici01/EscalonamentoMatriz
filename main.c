@@ -25,12 +25,18 @@ void freeMatriz(float** matriz,int tamanho){
     free(matriz);
 }
 
-int main()
+int main(int argc, char const *argv[])
 {
+    if (argc != 2)
+    {
+        printf("ERRO: excesso de argumentos!");
+        exit(1);
+    }
+    
     int quantidade=0,tamanho=0;
     float e=0.0;
 
-    FILE *arquivo = fopen("arquivo.txt", "r");
+    FILE *arquivo = fopen(argv[1], "r");
     fscanf(arquivo, "%i %i %f",&quantidade,&tamanho,&e);
     float termos[tamanho];
     float matrizFixa[tamanho][tamanho], termosFixos[tamanho];
