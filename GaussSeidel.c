@@ -31,8 +31,6 @@ float iteracaoGS(float **A, float *B, int tamanho, float *x) {
 }
 
 void gaussSeidel(float **A, float *B, int tamanho, float E){
-    validarSistema(A, B, tamanho);
-
     float *x = calloc(tamanho, sizeof(float));
     if (!x) {
         fprintf(stderr, "Erro de alocacao em gaussSeidel\n");
