@@ -15,31 +15,6 @@ float maximoModulo(float vetor[], int tamanho) {
     return max;
 }
 
-void validarSistema(float **A, float *B, int tamanho) {
-    for (int i = 0; i < tamanho; i++) {
-        int linhaNula = 1;
-        for (int j = 0; j < tamanho; j++) {
-            if (A[i][j] != 0.0f) {
-                linhaNula = 0;
-                break;
-            }
-        }
-        if (linhaNula) {
-            if (B[i] != 0.0f) {
-                printf("Linha %d e nula e B[%d] = %.2f -> sistema impossivel\n", i + 1, i + 1, B[i]);
-                exit(EXIT_FAILURE);
-            } else {
-                printf("Linha %d e B[%d] sao nulos -> sistema indeterminado\n", i + 1, i + 1);
-                exit(EXIT_FAILURE);
-            }
-        }
-        if (A[i][i] == 0.0f) {
-            printf("A[%d][%d] (diagonal principal) e zero -> divisao por zero\n", i + 1, i + 1);
-            exit(EXIT_FAILURE);
-        }
-    }
-}
-
 float iteracaoGJ(float **A, float *B, int tamanho, float *xAnterior, float *xAtual){
     float *d = malloc(tamanho * sizeof(float));
     if (!d) {
@@ -64,8 +39,6 @@ float iteracaoGJ(float **A, float *B, int tamanho, float *xAnterior, float *xAtu
 }
 
 void gaussJacobi(float **A, float *B, int tamanho, float E){
-    validarSistema(A, B, tamanho);
-
     float *xAnterior = calloc(tamanho, sizeof(float));
     float *xAtual = malloc(tamanho * sizeof(float));
     if (!xAnterior || !xAtual) {
@@ -86,7 +59,7 @@ void gaussJacobi(float **A, float *B, int tamanho, float E){
     clock_t fim = clock();
     double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
 
-    printf("\n[Gauss-Jacobi] Tempo: %.9lf segundos\n", tempo);
+    printf("\nGauss-Jacobi\nTempo: %.9lf segundos\n", tempo);
     printf("Solucao:\n");
     for (int i = 0; i < tamanho; i++) {
         printf("X%d = %.6f\n", i + 1, xAtual[i]);
