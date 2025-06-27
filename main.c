@@ -42,6 +42,11 @@ int main(int argc, char const *argv[]){
     float e=0.0;
 
     FILE *arquivo = fopen(argv[1], "r");
+    if (!arquivo) {
+        perror("Erro ao abrir o arquivo");
+        exit(1);
+    }
+
     fscanf(arquivo, "%i %i %f",&quantidade,&tamanho,&e);
 
     float** matriz = (float**) malloc(tamanho*sizeof(float*));
@@ -58,11 +63,11 @@ int main(int argc, char const *argv[]){
     }
     
     float **termos = (float**) malloc(quantidade*sizeof(float*));
-    for(int x=0;x<tamanho;x++){
+    for(int x=0;x<quantidade;x++){
         termos[x] = (float*) malloc(tamanho*sizeof(float));
     }
     float **termosFixos = (float**) malloc(quantidade*sizeof(float*));
-    for(int x=0;x<tamanho;x++){
+    for(int x=0;x<quantidade;x++){
         termosFixos[x] = (float*) malloc(tamanho*sizeof(float));
     }
     if (!termos||!termosFixos)
@@ -81,20 +86,19 @@ int main(int argc, char const *argv[]){
         for(int y=0;y<tamanho;y++){
             matrizFixa[x][y] = matriz[x][y];
         }
-        for (int i = 0; i < quantidade; i++)
-        {
-            termosFixos[x][i] = termos[x][i];
+        for (int i = 0; i < quantidade; i++) {
+            termosFixos[i][x] = termos[i][x];
         }
     }
 
     /**Print de Teste*/
     for(int x=0;x<tamanho;x++){
         for(int y=0;y<tamanho;y++){
-            printf("%.3f ",matriz[x][y]);
+            printf("%f ",matriz[x][y]);
         }
         for (int i = 0; i < quantidade; i++)
         {
-            printf("= %f\t",termos[x][i]);
+            printf("= %f\t",termos[i][x]);
         }
         printf("\n");
     }
@@ -102,62 +106,64 @@ int main(int argc, char const *argv[]){
 
     clock_t inicio, fim;
     double tempo;
-    printf("Eliminacao de Gauss\n");
+    printf("\n------Eliminacao de Gauss------\n");
     
     inicio = clock();
     for (int i = 0; i < quantidade; i++)
     {
-        printf("Sistema %d\n", i+1);
+        printf("\nSistema %d\n", i+1);
         resolverEliminacaoGauss(matriz, termos[i], tamanho);
         for(int x=0;x<tamanho;x++){
             for(int y=0;y<tamanho;y++){
                 matriz[x][y] = matrizFixa[x][y];
             }
-            termosFixos[i][x] = termosFixos[i][x];
+            termos[i][x] = termosFixos[i][x];
         }
     }
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo: %f\n",tempo);
+    printf("\n\tTempo: %f\n",tempo);
 
     inicio = clock();
     matrizL = calcularMatrizL(matriz,tamanho);
-    printf("Fatoracao LU\n");
+    printf("\n------Fatoracao LU------\n");
     for (int i = 0; i < quantidade; i++)
     {
-        printf("Sistema %d\n", i+1);
+        printf("\nSistema %d\n", i+1);
         resolverSistemaLU(matriz, matrizL, termos[i], tamanho);
     }
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo: %f\n",tempo);
+    printf("\n\tTempo: %f\n",tempo);
     
     inicio = clock();
-    printf("Gauss-Jacobi\n");
+    printf("\n------Gauss-Jacobi------\n");
     for (int i = 0; i < quantidade; i++)
     {
-        printf("Sistema %d\n", i+1);
+        printf("\nSistema %d\n", i+1);
         gaussJacobi(matrizFixa, termosFixos[i], tamanho, e);
     }
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo: %f\n",tempo);
+    printf("\n\tTempo: %f\n",tempo);
 
     inicio = clock();
-    printf("Gauss-Seidel\n");
+    printf("\n------Gauss-Seidel------\n");
     for (int i = 0; i < quantidade; i++)
     {
-        printf("Sistema %d\n", i+1);
+        printf("\nSistema %d\n", i+1);
         gaussSeidel(matrizFixa, termosFixos[i], tamanho, e);
     }
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo: %f\n",tempo);
+    printf("\n\tTempo: %f\n",tempo);
 
 
 
     freeMatriz(matriz,tamanho);
-    freeMatriz(matrizL,tamanho);
+    if (matrizL != NULL){
+        freeMatriz(matrizL, tamanho);
+    }
     freeMatriz(termos, quantidade);
     return 0;
 }

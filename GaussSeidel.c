@@ -7,7 +7,7 @@
 float iteracaoGS(float **A, float *B, int tamanho, float *x) {
     float *d = malloc(tamanho * sizeof(float));
     if (!d) {
-        fprintf(stderr, "Erro de alocacao em iteracaoGS\n");
+        printf("Erro de alocacao em iteracaoGS\n");
         exit(EXIT_FAILURE);
     }
 
@@ -32,7 +32,7 @@ float iteracaoGS(float **A, float *B, int tamanho, float *x) {
 void gaussSeidel(float **A, float *B, int tamanho, float E){
     float *x = calloc(tamanho, sizeof(float));
     if (!x) {
-        fprintf(stderr, "Erro de alocacao em gaussSeidel\n");
+        printf("Erro de alocacao em gaussSeidel\n");
         exit(EXIT_FAILURE);
     }
 
@@ -43,7 +43,7 @@ void gaussSeidel(float **A, float *B, int tamanho, float E){
 
     printf("Solucao:\n");
     for (int i = 0; i < tamanho; i++) {
-        printf("X%d = %.6f\n", i + 1, x[i]);
+        printf("X%d = %f\n", i + 1, x[i]);
     }
 
     free(x);

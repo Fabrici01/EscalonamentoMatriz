@@ -17,7 +17,7 @@ float maximoModulo(float vetor[], int tamanho) {
 float iteracaoGJ(float **A, float *B, int tamanho, float *xAnterior, float *xAtual){
     float *d = malloc(tamanho * sizeof(float));
     if (!d) {
-        fprintf(stderr, "Erro de alocacao em iteracaoGJ\n");
+        printf("Erro de alocacao em iteracaoGJ\n");
         exit(EXIT_FAILURE);
     }
 
@@ -41,7 +41,7 @@ void gaussJacobi(float **A, float *B, int tamanho, float E){
     float *xAnterior = calloc(tamanho, sizeof(float));
     float *xAtual = malloc(tamanho * sizeof(float));
     if (!xAnterior || !xAtual) {
-        fprintf(stderr, "Erro de alocacao em gaussJacobi\n");
+        printf("Erro de alocacao em gaussJacobi\n");
         exit(EXIT_FAILURE);
     }
 
@@ -55,7 +55,7 @@ void gaussJacobi(float **A, float *B, int tamanho, float E){
 
     printf("Solucao:\n");
     for (int i = 0; i < tamanho; i++) {
-        printf("X%d = %.6f\n", i + 1, xAtual[i]);
+        printf("X%d = %f\n", i + 1, xAtual[i]);
     }
 
     free(xAnterior);

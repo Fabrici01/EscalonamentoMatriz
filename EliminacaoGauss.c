@@ -43,7 +43,7 @@ void resolverEliminacaoGauss(float** matriz, float* termo, int tamanho){
         resultado[x] = (termo[x]-total)/matriz[x][x];
     }//-----------
 
-    printf("\nSolucao:\n");
+    printf("Solucao:\n");
     for(int x=0;x<tamanho;x++){
         printf("X%i = %f\n",x+1,resultado[x]);
     }
