@@ -1,4 +1,4 @@
-all: compila executa
+all: compila
 
 compila: main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o GaussSeidel.o
 	gcc main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o GaussSeidel.o -o prog.exe
@@ -17,9 +17,6 @@ GaussJacobi.o: GaussJacobi.c
 
 GaussSeidel.o: GaussSeidel.c
 	gcc -c GaussSeidel.c
-
-executa:
-	prog.exe arquivo.txt
 
 clean:
 	del /Q main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o GaussSeidel.o prog.exe 2> NUL
