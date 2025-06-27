@@ -1,7 +1,7 @@
 all: compila executa
 
-compila: main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o
-	gcc main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o -o prog
+compila: main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o GaussSeidel.o
+	gcc main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o GaussSeidel.o -o prog
 
 main.o: main.c
 	gcc -c main.c
@@ -15,8 +15,11 @@ FatoracaoLU.o: FatoracaoLU.c
 GaussJacobi.o: GaussJacobi.c
 	gcc -c GaussJacobi.c
 
+GaussSeidel.o: GaussSeidel.c
+	gcc -c GaussSeidel.c
+	
 executa:
 	./prog.exe arquivo.txt
 
 clean:
-	del main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o prog
+	del main.o EliminacaoGauss.o FatoracaoLU.o GaussJacobi.o GaussSeidel.o prog.exe

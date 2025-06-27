@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
 #include "./header/GaussJacobi.h"
 
 float maximoModulo(float vetor[], int tamanho) {
@@ -46,8 +45,6 @@ void gaussJacobi(float **A, float *B, int tamanho, float E){
         exit(EXIT_FAILURE);
     }
 
-    clock_t inicio = clock();
-
     float erro;
     do {
         erro = iteracaoGJ(A, B, tamanho, xAnterior, xAtual);
@@ -56,10 +53,6 @@ void gaussJacobi(float **A, float *B, int tamanho, float E){
         }
     } while (erro > E);
 
-    clock_t fim = clock();
-    double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-
-    printf("\nGauss-Jacobi\nTempo: %.9lf segundos\n", tempo);
     printf("Solucao:\n");
     for (int i = 0; i < tamanho; i++) {
         printf("X%d = %.6f\n", i + 1, xAtual[i]);

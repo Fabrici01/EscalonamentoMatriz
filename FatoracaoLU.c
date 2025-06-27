@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "./header/FatoracaoLU.h"
 
-float** calcularMatrizL(float** matrizU, float* termo, int tamanho){
+float** calcularMatrizL(float** matrizU, int tamanho){
     float** matrizL = (float**) malloc(tamanho*sizeof(float*));
     for(int x=0;x<tamanho;x++){
         matrizL[x] = (float*) calloc(tamanho, sizeof(float));
@@ -10,7 +10,7 @@ float** calcularMatrizL(float** matrizU, float* termo, int tamanho){
     }
 
     //Eliminação de Gauss em matrizU
-    float m=0.0,vetorTemp[tamanho],termoTemp=0.0;
+    float m=0.0,vetorTemp[tamanho];
     int i=0;
     for(int k=0;k<tamanho;k++){
         if(matrizU[k][k]==0){
